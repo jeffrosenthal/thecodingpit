@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none">
+  <!-- Icon: brackets + circuit dot -->
+  <text x="0" y="36" font-family="monospace" font-size="38" font-weight="900" fill="#38bdf8">&lt;</text>
+  <circle cx="28" cy="24" r="6" fill="#f59e0b"/>
+  <circle cx="28" cy="24" r="3" fill="#0f1f3d"/>
+  <text x="36" y="36" font-family="monospace" font-size="38" font-weight="900" fill="#38bdf8">/&gt;</text>
+  <!-- Text -->
+  <text x="82" y="32" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="white" letter-spacing="-0.3">The <tspan fill="#f59e0b">Coding</tspan> Pit</text>
+</svg>
