@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Coding Pit — Jeff Rosenthal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+    :root {
+      --navy:   #0f1f3d;
+      --blue:   #1e40af;
+      --sky:    #3b82f6;
+      --accent: #06b6d4;
+      --gold:   #f59e0b;
+      --light:  #f0f6ff;
+      --gray:   #64748b;
+      --text:   #1e293b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 65%, var(--sky) 100%);
+      color: white;
+      padding: 72px 48px 64px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 10%;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(245,158,11,.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,.12);
+      border: 2px solid rgba(255,255,255,.25);
+      border-radius: 20px;
+      font-size: 32px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(6px);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 36px;
+    }
+    .hero-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(8px);
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── TAGLINE STRIP ── */
+    .tagline-strip {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 18px 32px;
+      text-align: center;
+      font-size: 15px;
+      color: var(--gray);
+      letter-spacing: .3px;
+    }
+    .tagline-strip strong { color: var(--navy); }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 32px 80px;
+    }
+
+    /* ── SECTION HEADING ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-head-bar {
+      width: 5px; height: 30px;
+      background: linear-gradient(to bottom, var(--sky), var(--accent));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .section-head p {
+      font-size: 14px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    /* ── DOC CARDS ── */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .doc-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      overflow: hidden;
+      transition: transform .15s, box-shadow .15s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .doc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    }
+    .doc-card-header {
+      padding: 22px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .doc-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .doc-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .doc-card p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .doc-card-footer {
+      margin-top: auto;
+      padding: 12px 24px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .doc-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--light);
+      color: var(--blue);
+    }
+    .doc-arrow {
+      color: var(--sky);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* Coming soon card style */
+    .doc-card.coming-soon {
+      opacity: .55;
+      cursor: default;
+      pointer-events: none;
+    }
+    .doc-card.coming-soon:hover { transform: none; box-shadow: none; }
+    .soon-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 48px;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-text { flex: 1; min-width: 240px; }
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .about-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,.8);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .about-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .about-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+    }
+    .about-link .al-icon {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+    }
+    .about-link:hover .al-icon { background: rgba(255,255,255,.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px;
+      color: #94a3b8;
+      font-size: 12.5px;
+      border-top: 1px solid #e2e8f0;
+    }
+    footer strong { color: var(--gray); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 24px 40px; }
+      .hero h1 { font-size: 36px; }
+      .content { padding: 40px 20px 60px; }
+      .about-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="logo-mark">⚙️</div>
+    <h1>The <span>Coding Pit</span></h1>
+    <p class="hero-sub">Technology consulting &amp; AI integration — built for real businesses.</p>
+    <div class="hero-contacts">
+      <div class="hero-badge"><div class="dot"></div> Jeff Rosenthal</div>
+      <div class="hero-badge"><div class="dot"></div> <span class="c-phone"></span></div>
+      <div class="hero-badge"><div class="dot"></div> <span class="c-email"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TAGLINE ── -->
+<div class="tagline-strip">
+  <strong>Practical AI.</strong> No hype. No jargon. Just solutions that actually work for your business.
+</div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="content">
+
+  <!-- Resources -->
+  <div class="section-head">
+    <div class="section-head-bar"></div>
+    <div>
+      <h2>Resources &amp; Guides</h2>
+      <p>Plain-English documents to help you understand and use AI in your business.</p>
+    </div>
+  </div>
+
+  <div class="doc-grid">
+
+    <!-- AI Brochure -->
+    <a class="doc-card" href="https://jeffrosenthal.github.io/ai-guide/" target="_blank">
+      <div class="doc-card-header">
+        <div class="doc-icon" style="background:#eff6ff;">🤖</div>
+        <div>
+          <h3>Your AI Assistant — A Plain English Guide</h3>
+          <p>What AI is, what agents do, how costs work, cloud vs. local, and how to make it work for your business.</p>
+        </div>
+      </div>
+      <div class="doc-card-footer">
+        <span class="doc-tag">AI Basics</span>
+        <span class="doc-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- Placeholder: AI for Small Business -->
+    <div class="doc-card coming-soon">
+      <div class="doc-card-header">
+        <div class="doc-icon" style="background:#f0fdf4;">🏢</div>
+        <div>
+          <h3>AI for Small Business</h3>
+          <p>Practical use cases, ROI examples, and a step-by-step roadmap for small business AI adoption.</p>
+        </div>
+      </div>
+      <div class="doc-card-footer">
+        <span class="soon-badge">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Placeholder: Automation Guide -->
+    <div class="doc-card coming-soon">
+      <div class="doc-card-header">
+        <div class="doc-icon" style="background:#fef3c7;">⚡</div>
+        <div>
+          <h3>Workflow Automation 101</h3>
+          <p>How to identify repetitive tasks in your business and automate them with modern AI agent tools.</p>
+        </div>
+      </div>
+      <div class="doc-card-footer">
+        <span class="soon-badge">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Placeholder: Data Privacy -->
+    <div class="doc-card coming-soon">
+      <div class="doc-card-header">
+        <div class="doc-icon" style="background:#fdf4ff;">🔒</div>
+        <div>
+          <h3>AI &amp; Data Privacy</h3>
+          <p>What data leaves your business, what stays private, and how to choose tools that match your risk tolerance.</p>
+        </div>
+      </div>
+      <div class="doc-card-footer">
+        <span class="soon-badge">Coming Soon</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- About / Contact -->
+  <div class="about-card">
+    <div class="about-text">
+      <h2>Let's Talk About Your Business</h2>
+      <p>Every business is different. The best AI setup is the one built around how <em>you</em> actually work — not a generic solution. Reach out and let's figure out what makes sense for you.</p>
+      <div class="about-links">
+        <span class="about-link">
+          <div class="al-icon">📞</div>
+          <span class="c-phone"></span>
+        </span>
+        <span class="about-link">
+          <div class="al-icon">✉️</div>
+          <span class="c-email"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<footer>
+  <strong>Jeff Rosenthal</strong> &nbsp;·&nbsp; The Coding Pit &nbsp;·&nbsp; <span class="c-phone"></span> &nbsp;·&nbsp; <span class="c-email"></span> &nbsp;·&nbsp; © 2026
+</footer>
+
+<script>
+  (function() {
+    var _s = 3;
+    var _e = [109,104,105,105,67,119,107,104,102,114,103,108,113,106,115,108,119,49,102,114,112];
+    var _p = [43,59,52,54,44,35,55,57,57,48,53,53,53,59];
+    var email = _e.map(function(c){return String.fromCharCode(c-_s);}).join('');
+    var phone = _p.map(function(c){return String.fromCharCode(c-_s);}).join('');
+    document.querySelectorAll('.c-email').forEach(function(el){el.textContent = email;});
+    document.querySelectorAll('.c-phone').forEach(function(el){el.textContent = phone;});
+  })();
+</script>
+</body>
+</html>
